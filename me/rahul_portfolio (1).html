@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--accent:#6c63ff;--accent2:#ff6584;--accent3:#43e97b;--text:#e8e8f0;--muted:#6b6b80;--border:#2a2a3a}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-link{font-size:13px;color:var(--muted);cursor:pointer;transition:color 0.2s;background:none;border:none;font-family:'Space Grotesk',sans-serif}
+.nav-link:hover{color:var(--text)}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:6rem 2rem 4rem}
+.hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(108,99,255,0.13) 0%,transparent 70%);pointer-events:none}
+
+.avatar-wrap{position:relative;margin-bottom:2rem}
+.avatar-ring{width:110px;height:110px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#6c63ff,#ff6584,#43e97b);margin:0 auto}
+.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:700;color:#a09aff;letter-spacing:-1px;font-family:'JetBrains Mono',monospace}
+.avatar-status{position:absolute;bottom:6px;right:calc(50% - 58px);width:16px;height:16px;border-radius:50%;background:#43e97b;border:3px solid var(--bg);box-shadow:0 0 10px rgba(67,233,123,0.6)}
+
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.25);border-radius:999px;padding:6px 16px;font-size:12px;font-family:'JetBrains Mono',monospace;color:#a09aff;margin-bottom:1.5rem;letter-spacing:0.05em}
+.dot-pulse{width:7px;height:7px;border-radius:50%;background:#43e97b;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+h1{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:700;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1rem}
+.name-hi{color:var(--muted);font-weight:400}
+.name-main{background:linear-gradient(135deg,#6c63ff 30%,#ff6584);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.typing-wrap{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--muted);margin-bottom:0.5rem;min-height:1.8em;display:flex;align-items:center;justify-content:center;gap:6px}
+.typing-prefix{color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:0.9em}
+.typing-text{color:var(--text);font-weight:500}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);animation:blink 0.8s step-end infinite;margin-left:2px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.tagline{font-size:14px;color:var(--muted);max-width:440px;line-height:1.75;margin-bottom:2.5rem}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:#7c74ff;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border);padding:12px 28px;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-outline:hover{border-color:var(--accent);color:#a09aff}
+
+.scroll-hint{margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:11px;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,transparent,var(--accent));animation:sline 2s ease-in-out infinite}
+@keyframes sline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+section{padding:5rem 2rem;max-width:900px;margin:0 auto}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:0.75rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:3rem}
+.divider{width:100%;height:1px;background:var(--border);max-width:900px;margin:0 auto}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+@media(max-width:600px){.about-grid{grid-template-columns:1fr}}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.about-card h3{font-size:13px;color:var(--muted);margin-bottom:0.5rem;font-weight:400}
+.about-card p{font-size:14px;line-height:1.75}
+.info-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.info-row:last-child{border-bottom:none}
+.info-icon{width:32px;height:32px;border-radius:8px;background:rgba(108,99,255,0.12);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.info-label{color:var(--muted);font-size:11px}
+.info-val{font-weight:500;font-size:13px}
+
+.projects-grid{display:grid;gap:1.25rem}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.25s;position:relative;overflow:hidden}
+.project-card:hover{border-color:rgba(108,99,255,0.4);transform:translateY(-2px)}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.project-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.icon-purple{background:rgba(108,99,255,0.15)}
+.icon-pink{background:rgba(255,101,132,0.15)}
+.project-tag{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:4px 12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.project-title{font-size:1.15rem;font-weight:600;margin-bottom:0.5rem;letter-spacing:-0.01em}
+.project-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem}
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px}
+.tech-pill{font-size:12px;font-family:'JetBrains Mono',monospace;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text)}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.skill-group-title{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:1rem;font-family:'JetBrains Mono',monospace}
+.skill-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+.skill-item:last-child{border-bottom:none}
+.skill-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dp{background:#6c63ff}.dpi{background:#ff6584}.dg{background:#43e97b}.da{background:#f7c948}
+
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color 0.2s}
+.cert-card:hover{border-color:rgba(67,233,123,0.4)}
+.cert-org{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--accent3);letter-spacing:0.08em;margin-bottom:0.5rem}
+.cert-name{font-size:14px;font-weight:500;line-height:1.5}
+.cert-badge{display:inline-flex;align-items:center;gap:5px;margin-top:0.75rem;font-size:11px;color:var(--accent3);background:rgba(67,233,123,0.1);border-radius:999px;padding:3px 10px}
+
+.exp-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1rem;display:flex;gap:1.25rem;align-items:flex-start}
+.exp-icon{width:48px;height:48px;border-radius:12px;background:rgba(108,99,255,0.12);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.exp-title{font-size:1rem;font-weight:600;margin-bottom:4px}
+.exp-org{font-size:12px;color:var(--accent);margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.exp-desc{font-size:14px;color:var(--muted);line-height:1.7}
+
+.contact-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center}
+.contact-box h3{font-size:1.75rem;font-weight:700;margin-bottom:0.75rem;letter-spacing:-0.02em}
+.contact-box p{color:var(--muted);margin-bottom:2rem;line-height:1.7;font-size:14px}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.contact-link{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 20px;font-size:14px;color:var(--text);cursor:pointer;transition:all 0.2s}
+.contact-link:hover{border-color:var(--accent);color:#a09aff;transform:translateY(-1px)}
+
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:12px;font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">rahul.dev</span>
+  <div class="nav-links">
+    <button class="nav-link" onclick="s('about')">about</button>
+    <button class="nav-link" onclick="s('projects')">projects</button>
+    <button class="nav-link" onclick="s('skills')">skills</button>
+    <button class="nav-link" onclick="s('contact')">contact</button>
+  </div>
+</nav>
+
+<div class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="avatar-wrap">
+    <div class="avatar-ring">
+      <div class="avatar-inner">TR</div>
+    </div>
+    <div class="avatar-status"></div>
+  </div>
+  <div class="badge"><span class="dot-pulse"></span>Open to opportunities</div>
+  <h1><span class="name-hi">Hi, I'm </span><br><span class="name-main">Rahul</span></h1>
+  <div class="typing-wrap">
+    <span class="typing-prefix">&gt;</span>
+    <span class="typing-text" id="typed"></span>
+    <span class="cursor"></span>
+  </div>
+  <p class="tagline">B.Tech CSE (Business Systems) student at Swarnandhra College — building for the web and leading cloud innovation.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="s('projects')">View My Work</button>
+    <button class="btn-outline" onclick="s('contact')">Get in Touch</button>
+  </div>
+  <div class="scroll-hint"><span>scroll</span><div class="scroll-line"></div></div>
+</div>
+
+<div class="divider"></div>
+
+<section id="about">
+  <div class="section-label">01 / about</div>
+  <div class="section-title">A little about me</div>
+  <div class="about-grid">
+    <div>
+      <div class="about-card" style="margin-bottom:1rem">
+        <h3>Who I am</h3>
+        <p>Ambitious CS student with a passion for building useful things on the web. I combine technical skills with business thinking through my CSEBS degree.</p>
+      </div>
+      <div class="about-card">
+        <h3>Beyond coding</h3>
+        <p>I organize cloud computing events as Google Cloud Club Coordinator, mentor peers, and explore new ideas in business & tech.</p>
+      </div>
+    </div>
+    <div class="about-card">
+      <div class="info-row"><div class="info-icon">🎓</div><div><div class="info-label">Education</div><div class="info-val">B.Tech CSEBS, 2023–2027</div></div></div>
+      <div class="info-row"><div class="info-icon">🏫</div><div><div class="info-label">College</div><div class="info-val">Swarnandhra College of Engg. & Tech.</div></div></div>
+      <div class="info-row"><div class="info-icon">📍</div><div><div class="info-label">Location</div><div class="info-val">Narkedimilli, Andhra Pradesh</div></div></div>
+      <div class="info-row"><div class="info-icon">📧</div><div><div class="info-label">Email</div><div class="info-val">tumurahul08@gmail.com</div></div></div>
+      <div class="info-row"><div class="info-icon">📞</div><div><div class="info-label">Phone</div><div class="info-val">+91 88854 73903</div></div></div>
+      <div class="info-row"><div class="info-icon">🌐</div><div><div class="info-label">Languages</div><div class="info-val">English (Pro) · Telugu (Native)</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <div class="section-label">02 / projects</div>
+  <div class="section-title">Things I've built</div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon icon-purple">🛍️</div>
+        <span class="project-tag">Personal Project</span>
+      </div>
+      <div class="project-title">E-Commerce Website</div>
+      <div class="project-desc">A full-stack e-commerce platform with product catalog, shopping cart, and fully responsive design built from scratch.</div>
+      <div class="tech-stack">
+        <span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon icon-pink">🗳️</div>
+        <span class="project-tag">Personal Project</span>
+      </div>
+      <div class="project-title">PicOne Voting Website</div>
+      <div class="project-desc">Interactive platform for group photo selection via voting polls — users vote to pick the best pic from a set in real time.</div>
+      <div class="tech-stack">
+        <span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="section-label">03 / skills</div>
+  <div class="section-title">What I work with</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-item"><span class="skill-dot dp"></span>HTML & CSS</div>
+      <div class="skill-item"><span class="skill-dot dp"></span>JavaScript</div>
+      <div class="skill-item"><span class="skill-dot dp"></span>Responsive Design</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend / Data</div>
+      <div class="skill-item"><span class="skill-dot dpi"></span>Python</div>
+      <div class="skill-item"><span class="skill-dot dpi"></span>SQL</div>
+      <div class="skill-item"><span class="skill-dot dpi"></span>C Programming</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">CS Fundamentals</div>
+      <div class="skill-item"><span class="skill-dot dg"></span>Java</div>
+      <div class="skill-item"><span class="skill-dot dg"></span>DSA</div>
+      <div class="skill-item"><span class="skill-dot dg"></span>OOP Concepts</div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & Tools</div>
+      <div class="skill-item"><span class="skill-dot da"></span>Google Cloud</div>
+      <div class="skill-item"><span class="skill-dot da"></span>UI/UX Design</div>
+      <div class="skill-item"><span class="skill-dot da"></span>Social Networks</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label">04 / certifications</div>
+  <div class="section-title">Credentials</div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-org">NPTEL</div>
+      <div class="cert-name">Social Networks</div>
+      <div class="cert-badge">✓ Certified</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-org">NPTEL</div>
+      <div class="cert-name">Design and Implementation of Human Interface</div>
+      <div class="cert-badge">✓ Certified</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-org">OneRoadmap</div>
+      <div class="cert-name">Full Stack Development</div>
+      <div class="cert-badge">✓ Certified</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label">05 / experience</div>
+  <div class="section-title">Leadership & activities</div>
+  <div class="exp-card">
+    <div class="exp-icon">☁️</div>
+    <div>
+      <div class="exp-title">Coordinator — Google Cloud Club</div>
+      <div class="exp-org">Swarnandhra College of Engineering & Technology</div>
+      <div class="exp-desc">Led club activities, organized cloud computing events, mentored peers, and promoted hands-on cloud skills across campus.</div>
+    </div>
+  </div>
+  <div class="exp-card">
+    <div class="exp-icon">💡</div>
+    <div>
+      <div class="exp-title">Participant — Business Idea Competition</div>
+      <div class="exp-org">Swarnandhra College of Engineering & Technology</div>
+      <div class="exp-desc">Presented innovative tech-business solutions combining technical knowledge with entrepreneurial thinking.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="section-label">06 / contact</div>
+  <div class="contact-box">
+    <h3>Let's connect 👋</h3>
+    <p>Open to new opportunities, collaborations,<br>or just a good tech conversation.</p>
+    <div class="contact-links">
+      <div class="contact-link">📧 tumurahul08@gmail.com</div>
+      <div class="contact-link">📞 +91 88854 73903</div>
+      <div class="contact-link">📍 Narkedimilli, AP</div>
+    </div>
+  </div>
+</section>
+
+<footer>Built with care · Tumu Rahul Siva Kedareswara Rao · 2025</footer>
+
+<script>
+function s(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+const phrases=["Full Stack Developer","Web Developer","Cloud Enthusiast","B.Tech CSE Student","Problem Solver"];
+let pi=0,ci=0,deleting=false,el=document.getElementById('typed');
+function type(){
+  const phrase=phrases[pi];
+  if(!deleting){
+    el.textContent=phrase.slice(0,ci+1);ci++;
+    if(ci===phrase.length){setTimeout(()=>{deleting=true;tick()},1800);return}
+  }else{
+    el.textContent=phrase.slice(0,ci-1);ci--;
+    if(ci===0){deleting=false;pi=(pi+1)%phrases.length}
+  }
+  setTimeout(tick,deleting?60:100)
+}
+function tick(){type()}
+setTimeout(tick,600);
+</script>
+</body>
+</html>
