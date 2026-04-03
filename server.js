@@ -9,7 +9,10 @@ const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: '*' } });
 
 const dbFile = path.resolve(__dirname, 'crowdbuddy.sqlite');
-const db = new sqlite3.Database(dbFile);
+const db = new sqlite3.Database(dbFile, (err) => {
+  if (err) console.error("SQLite Connection Error: ", err);
+  else console.log("SQLite Database connected.");
+});
 
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS rooms (
