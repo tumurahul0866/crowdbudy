@@ -552,7 +552,8 @@ body{font-family:var(--font);color:var(--text);display:flex;flex-direction:colum
 <!-- Notification Toast -->
 <div class="notif-toast" id="toast"></div>
 
-<script src="/socket.io/socket.io.js"></script>\n<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // ── STATE ──────────────────────────────────────────────────────────
 var S = {
@@ -647,7 +648,7 @@ function connectSocket() {
       }
       if (S.markers[m.id]) {
         S.markers[m.id].setLatLng([m.lat, m.lng]);
-        S.markers[m.id].getPopup()?.setContent('<b>' + m.name + '</b><br><small>' + formatDist(m.dist) + ' away</small>');
+        if (m.name) S.markers[m.id].getPopup().setContent('<b>' + m.name + '</b><br><small>' + formatDist(m.dist) + ' away</small>');
       }
     }
   });
@@ -875,7 +876,7 @@ async function scanForBluetoothDevices() {
       optionalServices: ['battery_service']
     });
     
-    toast(Connected to  offline!, 'success');
+    toast(`Connected to ${device.name || 'Unknown Device'} offline!`, 'success');
     
     var btId = 'bt_' + Math.random().toString(36).substr(2, 9);
     var color = COLORS[Math.floor(Math.random()*COLORS.length)];
@@ -896,7 +897,7 @@ async function scanForBluetoothDevices() {
     renderBT();
     
     device.addEventListener('gattserverdisconnected', () => {
-      toast(${newMember.name} disconnected., 'warn');
+      toast(`${newMember.name} disconnected.`, 'warn');
       S.members = S.members.filter(x => x.id !== btId);
       renderMembers();
       renderBT();
